@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "key": "diplay-carwith-v1",
+  "owner": "xurunxin",
+  "repository": "DiPlay",
+  "project_title": "DiPlay · CarWith 手机投屏计划",
+  "summary": "先验证 CarWith 的 CarLife 兼容投屏，再交付多协议 MVP；ICCOA 原生能力单列研究。",
+  "milestones": [
+    {"key":"M0","title":"CarWith M0 · 可行性与接入审查","description":"G0：固定目标设备/软件版本，确认真实 CarWith 兼容入口及合法接入路径，形成 Go/No-Go。"},
+    {"key":"M1","title":"CarWith M1 · 首帧与连续视频","description":"G1：自有接收原型完成协商并显示目标 CarWith 的连续画面，不以独立 CarLife App 替代验收。"},
+    {"key":"M2","title":"CarWith M2 · 可交互无线 MVP","description":"G2：接入 DiPlay，支持视频、单指反控、媒体音频与导航播报，保留现有 CarPlay。"},
+    {"key":"M3","title":"CarWith M3 · 稳定性与试用版本","description":"G3：完成生命周期恢复、回归、脱敏诊断、兼容矩阵与范围明确的试用发布。"},
+    {"key":"M4","title":"CarWith M4 · 可选增强","description":"自动发现、USB 与 HUD 各自验证，不阻塞首版无线 MVP。"},
+    {"key":"R1","title":"CarWith R1 · ICCOA 原生接入研究","description":"调查 SDK、授权及能力等级，独立 Go/No-Go；不将 CarLife 成功当作 ICCOA 原生支持。"}
+  ],
+  "roadmap": {
+    "key": "ROADMAP",
+    "title": "[Roadmap] CarWith 手机投屏：CarLife 兼容后端 → 多协议 MVP → ICCOA 研究",
+    "body": "## 目标\n在安卓车机上的 DiPlay 中增加独立 CarLife 接收后端，验证指定小米手机现有 CarWith 的无线投屏、触控与基础音频。保留现有 CarPlay；原生 ICCOA、小窗与完整手机镜像不纳入第一版兼容承诺。\n\n## 初始证据状态\n截至计划建立时，尚未在目标手机/车机上完成联调，也未实现 CarWith 支持。历史 CarLife 源码是互操作研究参考，不等于当前 CarWith 协议规范；所有设备兼容性与认证条件都需要实测/确认。\n\n## 开发原则\n- 先证明指定 CarWith 入口能连通，再做大规模重构；第一版使用已知手机 IP。\n- Apple 的 MFi/iAP2/AirPlay 与 CarLife 会话分离；仅抽取公共显示、音频输出、输入坐标、诊断与可用的导航输出。\n- 不将 CarLife 音频直接送入 AirPlay RTP 接口，不把 AirPlayContact 当作 CarLife 输入格式。\n- 接收端只能显示手机实际输出内容，不承诺任意桌面、完整镜像、熄屏行为或第二屏。\n- 仅在自有/获授权设备与停车/台架环境测试；不绕过车辆安全限制，不复制未经授权的密钥、证书与渠道身份。\n\n## 提议架构\n```text\n投屏 UI / SessionManager\n          └─ ProjectionBackend\n               ├─ CarPlayBackend（封装现有控制器）\n               ├─ CarLifeBackend（新增）\n               └─ IccoaBackend（后续独立立项）\n公共层：VideoRenderer / AudioOutput / InputMapper / NavigationOutput / Diagnostics\n```\n\n## 维护规则\nPriority 使用 P0/P1/P2；阶段使用 M0–M4/R1，阶段与优先级不是同一概念。所有任务初始为 Todo，Readiness 区分 Ready/Blocked/Deferred/Tracking。G0/G1/G2/G3 是带证据的通过关卡；仅关闭 Issue 不代表关卡通过，No-Go 结论不得解锁下游实施。未指定个人负责人或截止日期。\n\n每个 PR 关联对应 Issue；关闭前附实现/研究结论、测试证据、设备与软件版本、已知限制。试用发布不宣传通用兼容。\n\n## 参考\n- https://github.com/xurunxin/DiPlay/blob/main/README.md\n- https://github.com/shihabal3amri/DiPlay\n- https://github.com/674809/carlife/tree/master/CarLife-Vehicle-Lib/LibSource\n- https://www.iccoa.cn/\n"
+  },
+  "tasks": [
+    {
+      "key":"BASELINE","title":"[M0] 固定设备矩阵并验证 CarWith 的 CarLife 兼容入口","stage":"M0","priority":"P0","area":"Research","depends_on":[],"readiness":"Ready",
+      "objective":"确认目标手机实际使用 CarWith 时，是否能通过 CarLife 兼容入口输出所需车载画面，避免开发完成后才发现入口或插件已变更。",
+      "work":["记录手机型号、地区/ROM、HyperOS/Android/CarWith/插件版本与安装来源；车机型号、固件、Android、显示与网络配置。","使用授权可用的参考接收端建立基线；记录 CarWith 的真实入口、连接步骤、提示与失败阶段。","比较 CarWith 模式和独立 CarLife App，截图/视频标注来源；采集脱敏的发现、协商、音视频/输入记录。","形成 G0 Go/No-Go：入口缺失、认证限制、参考实现不可用等分别记录，禁止根据旧教程推断当前成功。"],
+      "acceptance":["至少一个固定组合得到可重复成功证据，或可复现的 No-Go/阻塞报告。","明确手机输出的是 CarWith 车载桌面、CarLife 桌面还是完整镜像；未知处不写成已支持。","成功记录包括版本、入口、网络角色与实际视频证据；失败记录提供下一步实验。"],
+      "limits":"这是研究关卡；No-Go 也可作为研究结论，但不能据此解锁后续协议产品化。G0 必须有明确通过决定。"
+    },
+    {
+      "key":"PROVISIONING","title":"[M0] 审查参考实现、许可和接入认证条件","stage":"M0","priority":"P0","area":"Research","depends_on":[],"readiness":"Ready",
+      "objective":"确定可采用的代码与合法接入路径，单独管理 CarLife/ICCOA 与 Apple 认证边界。",
+      "work":["列出 DiPlay、xcertplay、DiAuto、历史 CarLife 源码/库的版本、来源、逐组件许可证与再分发限制。","核实目标 CarWith/插件的身份、渠道、令牌与认证流程；区分调试和生产接入条件，不预设无需认证。","记录 MFi 相关风险，只保留现有 CarPlay 路径所需配置；CarLife 构建与运行不能依赖 Apple 认证资产。","制定脱敏和凭据管理规则，禁止把私钥/证书/个人信息或未经授权的固件内容提交到仓库。"],
+      "acceptance":["形成接入与许可清单及未决项；实现、试用、商业分发分别给出准入条件。","明确获授权的实验路径与停止条件；没有把公开可下载等同于许可完备。","CI 与测试数据能使用合成身份，不引入可复用真实凭据。"],
+      "limits":"本任务结论不是法律意见；不能以更换包名、伪造渠道或复制提取出的身份作为默认实现方案。"
+    },
+    {
+      "key":"PROTOCOL","title":"[M1] 实现已知 IP 的最小 CarLife 会话与协议编解码","stage":"M1","priority":"P0","area":"Protocol","depends_on":["BASELINE","PROVISIONING"],"readiness":"Blocked",
+      "objective":"以已验证手机版本为目标建立可测试的无线接收原型；先完成连接、协商与必要通道，不先重构全部 UI。",
+      "work":["对比历史协议与授权实测记录，确认连接方向、端口、包头、大小端、长度限制、消息 ID、版本与认证/能力协商。","实现独立 CarLifeSession 与控制/视频/音频/输入等必要通道；端口和能力来源可配置且带版本。","实现 protobuf/消息编解码与状态机；处理 TCP 粘包/拆包、超时、未知消息、部分通道失败和资源释放。","从目标手机获取真实协商结果与视频初始化；测试工具默认只连接指定已知设备。"],
+      "acceptance":["可重复完成目标 CarWith 的版本/身份/能力协商，并进入真实的视频发送阶段。","合成单元测试覆盖消息边界、异常长度、截断、未知类型和失败回收。","脱敏日志能定位发现/连接/认证/协商/媒体中的失败阶段。"],
+      "limits":"G0 通过后启动；不预设所有版本都使用相同端口/通道/认证，也不把成功建 TCP 连接视为投屏成功。"
+    },
+    {
+      "key":"FIRST_FRAME","title":"[M1] 接收并解码 CarWith 首帧与连续视频（G1）","stage":"M1","priority":"P0","area":"Media","depends_on":["PROTOCOL"],"readiness":"Blocked",
+      "objective":"证明自有接收实现真正拿到目标 CarWith 的有效画面，作为大规模 DiPlay 集成前的门槛。",
+      "work":["确认 H.264 封装、NALU/帧边界、SPS/PPS、关键帧、时间戳和协商分辨率；不假定与 AirPlay 输入格式相同。","使用最小 Android 接收页解码到 Surface；协商允许时先测试 1280×720、30fps。","处理视频配置变更、解码异常与参考帧恢复；关键帧请求仅在协议确认支持时发送。","记录首帧时间、收帧/解码帧数、持续运行与断线重启结果。"],
+      "acceptance":["自有接收原型展示真实 CarWith 画面；不是录像、本地样本或单独 CarLife App 替代。","建议台架目标：连续显示 10 分钟并完成 5 次主动断开重连；结果与未达标原因留档。","G1 报告明确支持组合、视频参数与限制，且可按步骤复现。"],
+      "limits":"这里的分辨率、时长与次数是建议验收目标，不是已测性能或普遍兼容承诺。"
+    },
+    {
+      "key":"BACKENDS","title":"[M2] 抽取 ProjectionBackend 与公共媒体层并保留 CarPlay","stage":"M2","priority":"P0","area":"Architecture","depends_on":["FIRST_FRAME"],"readiness":"Blocked",
+      "objective":"把已验证 CarLife 原型接入 DiPlay，以独立后端复用 UI 和平台能力，避免混杂 Apple/CarLife 状态机。",
+      "work":["定义 ProjectionBackend/SessionManager 的发现、连接、关闭、状态与能力接口，封装现有 CarPlayController。","抽取与协议无关的视频配置/帧/时间戳/关键帧接口以及 PCM 播放层；保留解码队列与恢复机制。","主页提供后端选择；选择后再请求该后端权限，CarLife 路径不触发 MFi/iAP2/VPN 前置初始化。","限制一个前台会话占用 Surface、音频焦点和麦克风；统一退出与连接失败回收。","逐步拆分 CarPlayHostActivity 中公共 UI 与协议职责，避免无关的整体重写。"],
+      "acceptance":["在 DiPlay 中选择 CarLife 并显示 G1 已验证的连续画面。","无 Apple 认证资产的源码构建仍可运行 CarLife 测试路径。","CarPlay 构建/单测无新增失败；实机有线与无线回归结果或无法实测的限制明确记录。","切换后端不保留旧会话网络、线程、播放器与麦克风资源。"],
+      "limits":"仅在 G1 通过后大规模抽取；不得宣称保留接口等同于完成 CarPlay 实机回归。"
+    },
+    {
+      "key":"INPUT","title":"[M2] 实现坐标映射、单指反控与按键回传","stage":"M2","priority":"P1","area":"Input","depends_on":["BACKENDS"],"readiness":"Blocked",
+      "objective":"把车机触摸准确转换成目标 CarLife 输入消息，而不是复用 CarPlay 的触点编码。",
+      "work":["依据真实视频 viewport 与协商分辨率处理黑边、缩放、裁剪、旋转和安全区域。","实现按下/移动/抬起/取消及协议支持的基础按键；仅协商确认支持后增加多点、长按或旋钮。","窗口退出、断线和后端切换时释放所有触点；避免输入继续发送到旧会话。","对角点、边界、不同宽高比和连续手势编写坐标与动作测试。"],
+      "acceptance":["目标设备可点击四角、导航拖动、连续滑动与返回；无明显偏移和卡住的触点。","黑边外触摸不误操作内容；旋转/分辨率变更后映射正确。","所有控制只发送给当前用户已连接的会话。"],
+      "limits":"第一版仅承诺已验证的单指操作，不默认使用无障碍/ADB/Root 注入任意手机应用。"
+    },
+    {
+      "key":"AUDIO","title":"[M2] 接入音乐、导航播报及音频焦点","stage":"M2","priority":"P1","area":"Audio","depends_on":["BACKENDS"],"readiness":"Blocked",
+      "objective":"实现可区分媒体、导航播报的基础音频路径，并查清电话/麦克风的实际路由限制。",
+      "work":["按协商结果处理采样率、声道、采样格式和分包；解包/解码后进入公共 PCM 输出，不能直接塞进 AirPlay RTP 接口。","实现媒体与 TTS 的焦点/ducking/恢复；缓冲有界，记录欠载/过载与时间戳。","实测蓝牙、系统导航、CarLife 音频共存及电话中断后的恢复。","单独记录麦克风上行与 HFP 是否可用；未完成时 UI 不宣称支持，后续按证据拆任务。"],
+      "acceptance":["音乐与导航播报均可用，播报后音乐恢复正常音量；重复连接不出现残留播放。","台架记录音画同步、卡顿/欠载、通话中断恢复及已知限制。","麦克风权限拒绝不会阻止只看画面/听音频的已支持路径。"],
+      "limits":"不把 Wi-Fi 媒体音频等同于完整电话功能；语音助手/通话能力不得在未验证时默认为通过。"
+    },
+    {
+      "key":"LIFECYCLE","title":"[M3] 完善生命周期、断线恢复与后端资源隔离","stage":"M3","priority":"P0","area":"Reliability","depends_on":["INPUT","AUDIO"],"readiness":"Blocked",
+      "objective":"让已可交互的 MVP 在可控异常与车机生命周期变化中安全恢复，避免黑屏和资源泄漏。",
+      "work":["处理热点断开、IP 变化、权限撤销、前后台切换、Surface 销毁、车机休眠唤醒及手机锁屏的实际行为。","加入有界重试、退避、取消和 session generation，阻止旧会话回调污染新会话。","统一播放器、解码器、音频焦点、麦克风、线程/协程、USB 和网络资源回收。","保留用户主动断开的意图，禁止无限自动重连或自动打开未授权权限。"],
+      "acceptance":["建议台架目标：连续运行 60 分钟、20 次连接/断开循环，记录成功率与失败原因。","强制断线后可回到可理解状态并再次连接；无持续资源累积。","手机锁屏/后台结果按真实系统限制记录，不承诺未获支持的无感行为。"],
+      "limits":"时长和次数是初始验收目标而非实测结论；真车测试必须停车或在安全台架环境。"
+    },
+    {
+      "key":"VALIDATION","title":"[M3] 建立回归、脱敏诊断、兼容矩阵与试用发布（G3）","stage":"M3","priority":"P1","area":"Quality","depends_on":["LIFECYCLE","PROVISIONING"],"readiness":"Blocked",
+      "objective":"将实验结果变成可审计、范围明确的试用版本，不用单一设备成功宣称通用兼容。",
+      "work":["建立协议回放/合成包测试、媒体格式与输入映射测试、双后端构建/静态检查；从前序各阶段持续补测试。","诊断导出默认本地、用户主动分享；脱敏 IP/MAC/SSID/道路/设备标识/认证数据。","维护手机/ROM/CarWith/插件/车机固件兼容矩阵，分开记录视频、触控、音频、后台、USB、HUD。","编写安装、已知 IP 连接、权限说明、限制、故障排查和回退指引；发布前复核许可证、渠道/认证与源代码交付。","记录首帧/时延/丢帧/欠载/重连等实测方法、样本量和分位数，不只给平均值。"],
+      "acceptance":["G2/G3 有设备与版本完整的证据链接；未验证功能明确标记。","CI 不含真实凭据与未经许可样本，发布包具备依赖声明和变更记录。","试用 release 的功能描述与兼容矩阵一致，并提供已知问题与恢复方法。"],
+      "limits":"本 Issue 的发布验收在 M3，单元测试与诊断基础应从 M0/M1 并行建设；不等待发布前才测试。"
+    },
+    {
+      "key":"DISCOVERY","title":"[M4] 增加自动发现、已配对设备记忆与无线重连","stage":"M4","priority":"P2","area":"Connectivity","depends_on":["VALIDATION"],"readiness":"Deferred",
+      "objective":"在手动 IP 的无线 MVP 已稳定后改进连接体验。",
+      "work":["依据目标协议真实发现机制实现发现，不假定可复用 CarPlay Bonjour/蓝牙握手。","明确车机热点、手机热点与同一 LAN 的角色；处理地址变化、频段和路由兼容性。","仅记忆用户已确认设备，支持忘记、取消和手动 IP 回退；凭据不写日志。","与生命周期恢复统一状态机，避免两个重连机制互相竞争。"],
+      "acceptance":["目标组合可重复发现并连接；未知/多设备时需要明确选择。","失败时可回退手动方式，主动断开后不会强行重连。","不同网络场景的支持范围有证据。"],
+      "limits":"不阻塞第一版无线 MVP，也不承诺无需手机授权的静默连接。"
+    },
+    {
+      "key":"USB","title":"[M4] 验证并实现 CarLife 有线 USB 接入","stage":"M4","priority":"P2","area":"Connectivity","depends_on":["VALIDATION"],"readiness":"Deferred",
+      "objective":"独立确认目标 CarWith/插件和车机支持的 USB 模式，再决定实现范围。",
+      "work":["确认 Host/Accessory/其他通道模式、枚举、权限与手机侧入口，不照搬 iPhone 的 NCM/iAP2。","设计传输层适配到已验证 CarLifeSession，测试插拔、供电变化与权限拒绝。","区分研发调试通道与日常用户连接；任何 ADB 需求必须显式说明，不默认开放调试端口。"],
+      "acceptance":["形成有线接入 Go/No-Go 和具体设备兼容结论。","实施通过时完成插拔重连、视频/反控/音频回归；不可用时记录原因，不影响无线。"],
+      "limits":"USB 是独立增强，不预设普通 APK 可控制所有车机 USB 角色。"
+    },
+    {
+      "key":"NAVIGATION","title":"[M4] 适配结构化导航事件与受支持 BYD HUD","stage":"M4","priority":"P2","area":"Vehicle","depends_on":["VALIDATION"],"readiness":"Deferred",
+      "objective":"只有手机真实发送导航元数据且车机输出受支持时，复用统一导航输出。",
+      "work":["验证目标 CarWith/地图版本是否提供转向、道路、距离等结构化字段，保存脱敏协议样本。","转换成协议中立的 NavigationEvent，再连接符合固件范围的车辆输出。","处理路线结束、断线、数据过期与下次启动清理；把进程被强杀时的限制写入文档。","检查仪表速度等安全信息不被遮挡；不把 CarPlay 仪表第二路视频当作 CarLife 能力。"],
+      "acceptance":["仅在明确允许的固件/接收组件版本上输出，并有停车/台架验证证据。","缺元数据或固件不支持时自动禁用/解释，不伪造导航信息。","无敏感道路文本日志，清理行为和异常残留限制可复现。"],
+      "limits":"非通用 HUD 适配；不修改车辆安全信息与安全策略。"
+    },
+    {
+      "key":"ICCOA","title":"[R1] 调查 ICCOA SDK、授权与原生 CarWith 能力边界","stage":"R1","priority":"P2","area":"Research","depends_on":[],"readiness":"Deferred",
+      "objective":"独立评估原生 Carlink 接入，区分经典投屏、融合桌面、小窗和镜像，决定是否另开实现路线。",
+      "work":["从官方或授权供应商核实 SDK、文档、样例、协议版本、硬件/签名要求和分发条件。","按目标手机与车机核对能力等级，不以历史版本门槛代替当前确认。","分析与 ProjectionBackend 的接口契合度及各等级的媒体/输入/窗口/权限差异。","提交独立 ADR：现有资料、缺口、实验步骤、风险、准入条件和 Go/No-Go；通过后另开实现 Issues。"],
+      "acceptance":["交付可追溯资料与接入方案，未获资料或授权明确标记。","完整镜像/小窗/系统级后台能力各自说明证据与限制。","CarLife MVP 不依赖本研究完成；不在第一版宣传原生 ICCOA 支持。"],
+      "limits":"可并行做资料调研，但实现暂缓；本 Issue 完成表示研究结论完成，不表示协议已实现。"
+    }
+  ]
+}
