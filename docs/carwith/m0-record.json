@@ -1,14 +1,23 @@
 {
   "schema_version": 1,
   "decision": "Blocked",
-  "reason": "No target phone/head unit, CarWith baseline or authorized reference receiver was available in this session. G0 has not passed.",
-  "next_step": "Provide the device/software matrix and an authorized receiver; run the parked/bench baseline in M0_REVIEW.md and submit reviewed evidence.",
+  "reason": "User confirms no visible CarLife entry in this CarWith version; YiLian entry has no detailed instructions. Phone/emulator metadata and UI metrics verified, but authorized compatible receiver/SDK, authentication and real CarWith sessions are missing.",
+  "next_step": "Keep original CarLife G0 blocked. Evaluate authorized CarbitLink and ICCOA receiver/SDK, version matrix, x86_64/emulator support, identity and test/integration license before separately approving a backend change; see EMULATOR_FINDINGS.md.",
   "phone": {
-    "model": "", "region_rom": "", "hyperos": "", "android": "",
-    "carwith_version": "", "plugin_version": "", "installation_source": ""
+    "model": "Redmi K30 Pro",
+    "region_rom": "MIUI V14.0.4.0.SJKCNXM; region not independently confirmed",
+    "hyperos": "Not identified; observed MIUI V140",
+    "android": "12 (API 31)",
+    "carwith_version": "com.miui.carlink 3.2.0-20241009 (103002000)",
+    "plugin_version": "",
+    "installation_source": "installerPackageName=com.xiaomi.market"
   },
   "head_unit": {
-    "model": "", "firmware": "", "android": "", "display": "", "network_role": ""
+    "model": "Android Emulator 37.1.11 / isolated DiPlay_G0_API34 (not real vehicle hardware)",
+    "firmware": "Google Play x86_64 Android 34 image revision 14",
+    "android": "14 (API 34)",
+    "display": "1280x720 override; 240 dpi; 60 Hz configured",
+    "network_role": "Default emulator network; no phone bridge, forwarding or network settings changed"
   },
   "carwith_entry": "",
   "reference_receiver": "",

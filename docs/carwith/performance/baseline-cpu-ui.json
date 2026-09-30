@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "profile": "baseline",
+  "host_affinity_mask": "not_set",
+  "captured_at": "2026-09-30T02:49:59.208157+00:00",
+  "scope": "debug UI only; no CarWith session or video fixture",
+  "package": "com.shihab.diplay.hudtest",
+  "android": "14",
+  "abi": "x86_64",
+  "guest_cpu_count": 4,
+  "guest_mem_total_kib": 2534120,
+  "display": "Physical size: 1080x2340\nOverride size: 1280x720",
+  "density": "Physical density: 440\nOverride density: 240",
+  "cold_process_launch_ms": [
+    2988,
+    2906,
+    1407,
+    1167,
+    1572
+  ],
+  "launch_median_ms": 1572,
+  "launch_p95_ms": 2988,
+  "cold_launch_caveat": "process force-stopped; OS/storage caches not cleared",
+  "duration_seconds": 60.03,
+  "ui_transitions": 97,
+  "observed_pid_changes": 0,
+  "gfx": {
+    "rendered_ui_frames": 1980,
+    "janky_ui_frames": 138,
+    "ui_frame_p50_ms": 17,
+    "ui_frame_p90_ms": 23,
+    "ui_frame_p95_ms": 32,
+    "ui_frame_p99_ms": 150,
+    "janky_ui_percent": 6.97,
+    "projection_fps": null,
+    "projection_latency_ms": null
+  },
+  "resources": [
+    {
+      "cpu_percent_single_core_interval": null,
+      "pss_kib": 77375,
+      "rss_kib": 166040,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 12046ms to 7035ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 0.0
+    },
+    {
+      "cpu_percent_single_core_interval": 43.31,
+      "pss_kib": 89022,
+      "rss_kib": 179316,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 22294ms to 17283ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 10.5
+    },
+    {
+      "cpu_percent_single_core_interval": 41.55,
+      "pss_kib": 89348,
+      "rss_kib": 180220,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 32078ms to 27067ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 20.31
+    },
+    {
+      "cpu_percent_single_core_interval": 40.82,
+      "pss_kib": 89098,
+      "rss_kib": 179988,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 41897ms to 36886ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 30.12
+    },
+    {
+      "cpu_percent_single_core_interval": 40.38,
+      "pss_kib": 89781,
+      "rss_kib": 180696,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 52229ms to 47218ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 40.42
+    },
+    {
+      "cpu_percent_single_core_interval": 40.65,
+      "pss_kib": 89160,
+      "rss_kib": 180080,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 62024ms to 57013ms ago (2026-09-30 02:48:46.152 to 2026-09-30 02:48:51.163):",
+      "elapsed_seconds": 50.23
+    }
+  ],
+  "cpu_caveat": "proc stat utime+stime delta / CLK_TCK / elapsed seconds; 100% means one guest CPU; first interval null. dumpsys is an independent historical window.",
+  "snapdragon_625_equivalent": false
+}

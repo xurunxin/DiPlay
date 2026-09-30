@@ -7,3 +7,5 @@ For channel memory, connect until authenticated CarPlay renders, disconnect and 
 Include head-unit model, DiLink/Android, iPhone/iOS, wired/wireless, app version and exact steps. Do not post credentials or unreviewed personal information. See [compatibility](COMPATIBILITY.md) for remaining limitations.
 
 CarWith roadmap work starts with the [M0 access review and bench baseline](carwith/M0_REVIEW.md). Its current G0 decision is Blocked; CarWith support is not implemented or hardware-verified.
+
+Reproducible emulator UI/CPU measurements and current CarWith, CarbitLink, and ICCOA blockers are recorded in [emulator findings](carwith/EMULATOR_FINDINGS.md). These measurements do not validate projection or Snapdragon 625 equivalence.
