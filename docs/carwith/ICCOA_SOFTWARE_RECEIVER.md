@@ -1,5 +1,8 @@
 # ICCOA Carlink 纯软件车机接收器：技术可行性与最小 PoC
 
+本轮更新：新 HyperOS 3 手机官方 CarWith UI 已显示 CarLife 组件兼容路径，原 Project CarLife PoC 恢复优先；参见 [新证据与 G0](CARLIFE_COMPATIBILITY.md)。本文仅为独立 ICCOA 研究，获取 ICCOA SDK 不是 CarLife 后端的前提。旧 K30 Pro 无可见入口仅适用于旧组合，尚无任何新手机握手/视频成功证据。
+
+
 核查日期：2026-09-30。产品目标：**DiPlay 作为安卓车机应用，直接接收 CarPlay 与原生 CarWith；摆脱外置连接盒。** 本文研究 ICCOA，不改变 [Project #1](https://github.com/users/xurunxin/projects/1) 的实施依赖，不申请账号、同意条款、修改手机安全设置或宣布 G0 通过。当前没有取得 SDK 或规范正文，没有运行 ICCOA 会话。
 
 ## 核心结论与证据等级
