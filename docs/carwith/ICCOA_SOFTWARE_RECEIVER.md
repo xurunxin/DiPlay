@@ -1,9 +1,9 @@
 # ICCOA Carlink 纯软件车机接收器：技术可行性与最小 PoC
 
-本轮更新：新 HyperOS 3 手机官方 CarWith UI 已显示 CarLife 组件兼容路径，原 Project CarLife PoC 恢复优先；参见 [新证据与 G0](CARLIFE_COMPATIBILITY.md)。本文仅为独立 ICCOA 研究，获取 ICCOA SDK 不是 CarLife 后端的前提。旧 K30 Pro 无可见入口仅适用于旧组合，尚无任何新手机握手/视频成功证据。
+最新用户指令：**原生 CarWith / ICCOA Carlink 为主线，CarLife 仅回退**。暂停 CarLife 主线扩展，当前发现/认证/首帧状态及最小SDK输入见 [原生首帧计划与实际阻塞](NATIVE_CARWITH_FIRST_FRAME.md)。原 Project 的 CarLife 顺序不阻止有真实合同依据的原生 PoC；未修改看板或关闭 Issues。
 
 
-核查日期：2026-09-30。产品目标：**DiPlay 作为安卓车机应用，直接接收 CarPlay 与原生 CarWith；摆脱外置连接盒。** 本文研究 ICCOA，不改变 [Project #1](https://github.com/users/xurunxin/projects/1) 的实施依赖，不申请账号、同意条款、修改手机安全设置或宣布 G0 通过。当前没有取得 SDK 或规范正文，没有运行 ICCOA 会话。
+核查日期：2026-09-30。产品目标：**DiPlay 作为安卓车机应用，直接接收 CarPlay 与原生 CarWith；摆脱外置连接盒。** 本轮执行优先级遵循用户最新指令；保留 [Project #1](https://github.com/users/xurunxin/projects/1) 原字段与历史依赖记录，不将其误作原生 PoC 的硬前置，不申请账号、同意条款、修改手机安全设置或宣布 G0 通过。当前没有取得 SDK 或规范正文，没有运行 ICCOA 会话。
 
 ## 核心结论与证据等级
 
@@ -27,11 +27,13 @@
 | 经典投屏1.0 / 融合桌面全屏1.5 | MIUI13 / HyperOS1.0及以上；Android13及以上 | MIUI14满足系统代际提示，但Android12不满足此处Android13条件 |
 | 融合桌面小窗1.6 / 镜像2.0 | HyperOS2.0及以上；Android15及以上；CarWith3.6.0及以上 | Android12、MIUI14、CarWith3.2.0均不满足该组当前提示 |
 
+补充一手证据：[官方历史手机支持列表](https://www.iccoa.cn/carlinkphonelist.html)明确列出 Redmi K30 Pro，未列其精确 ROM/CarWith/协议版本。当前 Android12 组合不能仅由新版案例页 Android13+ 条件排除，仍可作为待验证的原生经典投屏目标。
+
 这是**手机能力提示，不是车机SDK最低Android版本**。3.6.0条件不能倒套到1.0；2022公告的历史上线范围也不能代替现在的逐型号确认。当前手机没有可见CarLife入口、有亿连入口及ICCOA标识，但尚未验证原生ICCOA兼容性。应核实该型号/ROM/CarWith3.2是否支持历史经典投屏及匹配哪版车端SDK；不能直接下“绝不兼容”结论，也不能以刷机/隐藏开关来补证据。若目标是2.0镜像，应另选官方确认支持的手机，不能把经典投屏的应用生态承诺成任意手机界面完整镜像。
 
 ## 公开规范、SDK、参考源码和许可
 
-实际访问记录：新站已发布标准/产品文档/接入指南列表返回401；标准68页面的下载按钮调用 `POST /callback/download.jsp`、参数articleId=68，本次按同一公开方式请求返回code150001、“请先登陆再进行下载”。未提交凭据或绕过认证。规范简介和隐私政策不是API手册或线上的认证合同。
+实际访问记录：新站已发布标准/产品文档/接入指南列表匿名请求 HTTP200、JSON业务code401；标准68页面的下载按钮调用 `POST /callback/download.jsp`、参数articleId=68，本次按同一公开方式请求返回code150001、“请先登陆再进行下载”。未提交凭据或绕过认证。规范简介和隐私政策不是API手册或线上的认证合同。
 
 [在线申请](https://www.iccoa.cn/join/apply.html)要求单位名，说明邮箱用于成员索取技术资料；[实际联盟章程地址](https://www.iccoa.cn/about/11.html)提到符合条件的自然人和组织，以及运营会费。`/site/alliedMember`是联盟成员页面，不能当作章程引用。会费不是SDK报价；自然人可入会也不自动赋予SDK/再分发权限。个人项目、独立后装APK是否准入、是否需会员、开发/认证/发行费用，仍待具体答复。本轮不建议立刻付费或入会。
 
@@ -43,6 +45,7 @@
 | [frisky1985/yuleDKCS](https://github.com/frisky1985/yuleDKCS) | Apache-2.0，数字钥匙系统 | 有许可也不等于投屏协议，不复用其安全SE要求来推定Carlink硬件要求 |
 | [lvalen91/Carlink](https://github.com/lvalen91/Carlink) | API识别为Unlicense；README要求CPC200-CCPA连接盒，源码有UsbAdapterPlayer/USB协议层 | 是host-dongle架构；USB消息出现ICCOA名称也不能证明公开了手机侧原生协议，更不能作去盒方案 |
 | [hyksosss/ICCOA-tool](https://github.com/hyksosss/ICCOA-tool) | 依赖已有com.ucarhu.demo的窗口调试启动器，要求DUMP权限 | 不是独立接收端，未安装/授予权限；非官方重发布不能证明SDK许可、身份或ABI |
+| [Hyggec/iccoavoice](https://github.com/Hyggec/iccoavoice)（本轮新增核查） | README为Carlink语音端到端测试网页/语料，GitHub未识别许可证 | 未提供可验证车端发现/认证接收实现，不当作SDK |
 | CarWithPlus等搜索结果 | 未取得足够实现和许可证据 | 未认定为独立投屏接收端，不导入 |
 
 GitHub关键词检索和公开Maven的iccoa查询未核得可信许可的独立ICCOA投屏实现；Maven carlink查询超时，不能当作“无工件”证据。检索无结果不证明全球不存在方案。
@@ -95,17 +98,11 @@ SDK路线中，未知协议层可以由合法SDK承担，DiPlay仍负责宿主UI
 5. **P4交互音频与回归**：依合同加入触控取消/旋转/焦点、音乐/导航/通话与用户许可后的麦克风；验证停启/后台/断网，回归现有CarPlay。多屏、小窗、镜像各自单独准入。实验成功也不自动改原路线图关卡。
 6. **P5真实低端车机性能**：有真实视频链路后，在实际ARM/625级目标测首帧、持续FPS、丢弃/恢复、CPU/PSS、网络/解码/渲染时间和长跑；测法区分本地收到帧至Surface与端到端。后者需要时钟关联或可控视觉事件与外部测量，不能拿touch2frame或UI帧时间代替。
 
-现有七组[UI基准](EMULATOR_FINDINGS.md)仅是UI；AVD内存请求1GB被提高至2560MB，x86/WHPX/SwiftShader未校准625。当前没有视频、输入、音频或端到端性能数字，本轮没有重启AVD或追加UI测量。
+现有[UI基准](EMULATOR_FINDINGS.md)与[合成AVC解码台架](RECEIVER_BENCH.md)只验证各自的本地输入。AVD内存被提高至2560MB，x86/WHPX/SwiftShader未校准625；没有原生 CarWith 视频、输入、音频或端到端性能数字。首帧优先，本轮不再扩展通用基准。
 
-## 可独立实施的软件基础模块（提案，尚未编写）
+## 已有基础与原生链路边界
 
-| 内容/候选位置 | 依赖与实际收益 | 验证与边界 |
-| --- | --- | --- |
-| debug ReceiverEnvironmentProbe（mobile debug实验源集） | Android公开PackageManager/Build/MediaCodecList；不需SDK，明确真实车机ABI/解码声明/权限缺项 | 不读设备唯一ID/SSID/密码，不自动开蓝牙/Wi-Fi或授予权限；输出未知而非伪造支持 |
-| debug DecoderFixtureRunner | 已有媒体末端、确定性fixture及许可；验证实际解码/Surface，而非更多UI压力 | 不抽取生产ProjectionBackend，不借Apple身份；记录输入hash/codec/config/rate、首帧/恢复与真实计时范围 |
-| debug ReceiverMetrics与实验生命周期台架 | 单调时钟、独立计数，测试队列超时/释放和PID/PSS采样 | 将queued、decoded、Surface callback和物理呈现区分；不把模拟fixture叫CarWith视频 |
-
-模块可以依上述顺序独立推进，具体产品后端签名仍等SDK合同；本轮只交付技术研究提案，没有擅自扩展生产实现或额外安装软件。
+`mobile/src/debug/java/com/shilapi/xcertplay/bench/ReceiverBenchActivity.java` 已实现只读环境/codec声明、本地AVC fixture、取消恢复及报告；不是SDK适配器，也不包含ICCOA发现、配对、认证或协商。已有媒体末端可在真实Surface/压缩帧合同确定后复用。当前不追加占位后端或更多基础测试充当原生进度，下一项应是真实SDK初始化与发现。
 
 ## 最小下一步与精确缺项
 

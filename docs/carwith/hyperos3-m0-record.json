@@ -2,7 +2,7 @@
   "schema_version": 1,
   "decision": "Blocked",
   "reason": "User-provided screenshots show official CarWith CarLife entry and component-download prompt. New phone metadata, actual installed component identity/source, compatible authorized receiver and repeated real CarWith video are not yet verified.",
-  "next_step": "Prioritize the original CarLife compatibility PoC on the new phone; see CARLIFE_COMPATIBILITY.md and hyperos3-m0-record.json. Complete legal receiver/identity review and repeatable real CarWith video before G0 Go. ICCOA research remains independent, not a prerequisite for CarLife.",
+  "next_step": "User now prioritizes native CarWith / ICCOA Carlink discovery, authentication and first frame; CarLife is fallback only. Obtain a legally testable head-unit SDK plus initialization/discovery sample, or sufficient permitted protocol specifications. See NATIVE_CARWITH_FIRST_FRAME.md. This CarLife record stays Blocked and cannot certify the native path.",
   "phone": {
     "model": "",
     "region_rom": "",

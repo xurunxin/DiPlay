@@ -10,4 +10,4 @@ CarWith roadmap work starts with the [M0 access review and bench baseline](carwi
 
 Reproducible emulator UI/CPU measurements and current CarWith, CarbitLink, and ICCOA blockers are recorded in [emulator findings](carwith/EMULATOR_FINDINGS.md). These measurements do not validate projection or Snapdragon 625 equivalence.
 
-CarLife priority has been restored based on the new phone's official component UI; see [compatibility evidence](carwith/CARLIFE_COMPATIBILITY.md). The independent [debug receiver decoder bench](carwith/RECEIVER_BENCH.md) tests synthetic local media only and cannot unlock G0.
+The latest user instruction prioritizes native CarWith / ICCOA Carlink discovery, authentication and first frame; CarLife is fallback only. See [current native plan and blockers](carwith/NATIVE_CARWITH_FIRST_FRAME.md). The independent [debug receiver decoder bench](carwith/RECEIVER_BENCH.md) tests synthetic local media only and cannot unlock G0.

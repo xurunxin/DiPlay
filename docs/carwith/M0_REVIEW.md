@@ -2,6 +2,8 @@
 
 关联 [Project #1](https://github.com/users/xurunxin/projects/1)、[路线图 #2](https://github.com/xurunxin/DiPlay/issues/2)、[设备基线 #3](https://github.com/xurunxin/DiPlay/issues/3)、[许可/认证 #4](https://github.com/xurunxin/DiPlay/issues/4)。核验日期：2026-09-30。
 
+> 执行优先级更新：用户现要求原生 CarWith / ICCOA Carlink 首帧为主线，CarLife仅回退；原Project依赖在此保留为历史计划，不凌驾于最新指令。原生实际阶段与最小输入见 [原生首帧计划与实际阻塞](NATIVE_CARWITH_FIRST_FRAME.md)；没有改看板或关闭Issues。
+
 ## 结论与当前证据
 
 > 以下是同日较早的无设备快照。随后已接入真实手机、启动隔离 AVD 并完成 UI 基准；当前入口和授权阻塞见 [真机与模拟器核查](EMULATOR_FINDINGS.md)。用户确认当前手机没有可见 CarLife 入口、只有亿连；G0 仍未通过。
