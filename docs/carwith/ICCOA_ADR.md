@@ -1,5 +1,7 @@
 # ADR：ICCOA Carlink 接入的研究准入条件
 
+> 后续产品目标已明确为DiPlay内嵌软件接收器、摆脱外置盒。最新官方证据、兼容矩阵和分层PoC见 [纯软件接收器研究](ICCOA_SOFTWARE_RECEIVER.md)。商业接收APP只可选作授权对照，不是最终产品依赖。
+
 日期：2026-09-30。状态：**研究结论 Blocked，待授权资料；不是产品 No-Go。** 对应 [R1 #15](https://github.com/xurunxin/DiPlay/issues/15)。用户要求核查 ICCOA 直连 CarWith 方向，未授权申请或切换原实施路线。本 ADR 不关闭 #15，不解锁 CarLife G0/G1，也不宣传原生支持。
 
 ## 可追溯资料与决定
@@ -15,7 +17,7 @@
 - [hyksosss/ICCOA-tool](https://github.com/hyksosss/ICCOA-tool) README是Android10窗口观察/启动工具，依赖既有 `com.ucarhu.demo`、要求授予DUMP；不是独立接收端。本次没有安装或授予权限。
 - `CarbitLink SDK` 仓库检索无结果只代表该次检索；不证明不存在商业/私有/其他名称的方案。
 
-决定：保留独立研究路线，优先核实原生ICCOA与官方亿连对当前CarWith的版本支持及交付条件。取得合法接收端后先做最小真实会话，再决定后端实现。亿连官方已有较直接的CarWith兼容说明，可能成为更短验证路径，但精确版本、包、ABI与许可仍缺；本次没有选定后端或更改Project。
+决定：保留独立研究路线，优先核实原生ICCOA与官方亿连对当前CarWith的版本支持及交付条件。优先取得可嵌入DiPlay的合法SDK或完整规范/测试身份，在应用内做最小真实会话，再决定后端实现。亿连官方已有较直接的CarWith兼容说明，可能成为更短验证路径，但精确版本、包、ABI与许可仍缺；本次没有选定后端或更改Project。
 
 ## 能力等级必须分别证明
 

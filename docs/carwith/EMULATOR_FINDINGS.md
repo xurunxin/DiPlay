@@ -1,5 +1,7 @@
 # CarWith 真机与模拟器核查（2026-09-30）
 
+> 后续产品目标已明确为DiPlay内嵌软件接收器、摆脱外置盒。最新官方证据、兼容矩阵和分层PoC见 [纯软件接收器研究](ICCOA_SOFTWARE_RECEIVER.md)。商业接收APP只可选作授权对照，不是最终产品依赖。
+
 [完整路线图 Project #1](https://github.com/users/xurunxin/projects/1) 的范围与依赖见 [M0_REVIEW](M0_REVIEW.md)。本报告更新同日较早的“无 ADB 设备”快照。**G0 仍为 Blocked；没有 CarWith 握手、视频流、反控或音频成功记录。** 本次实现的是只读设备采集、门禁证据检查、可复现 AVD 配置及实际 UI 基准工具，产品仍未实现 CarWith 后端。没有将完整路线图改为文档任务或替代协议。
 
 ## 手机和接收端可行性

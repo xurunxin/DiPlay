@@ -2,7 +2,7 @@
   "schema_version": 1,
   "decision": "Blocked",
   "reason": "User confirms no visible CarLife entry in this CarWith version; YiLian entry has no detailed instructions. Phone/emulator metadata and UI metrics verified, but authorized compatible receiver/SDK, authentication and real CarWith sessions are missing.",
-  "next_step": "Keep original CarLife G0 blocked. Evaluate authorized CarbitLink and ICCOA receiver/SDK, version matrix, x86_64/emulator support, identity and test/integration license before separately approving a backend change; see EMULATOR_FINDINGS.md.",
+  "next_step": "Keep original CarLife G0 blocked. Evaluate ICCOA SDK embedded inside DiPlay, or complete implementable protocol specifications and legal test identity, to build a software receiver without an external dongle or dependency on a commercial receiver app; see ICCOA_SOFTWARE_RECEIVER.md.",
   "phone": {
     "model": "Redmi K30 Pro",
     "region_rom": "MIUI V14.0.4.0.SJKCNXM; region not independently confirmed",
