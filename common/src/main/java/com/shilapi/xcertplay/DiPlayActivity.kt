@@ -821,6 +821,9 @@ class DiPlayActivity : ComponentActivity() {
                     appendLine("--- Last display negotiation (timestamps distinguish it from current settings) ---")
                     appendLine(DisplayDiagnosticSnapshot.report(appContext))
                     appendLine()
+                    appendLine("--- Native CarWith receiver preflight (no connection attempted) ---")
+                    appendLine(NativeCarWithDiagnostics.report(appContext))
+                    appendLine()
                     for (name in SessionLogFile.REPORT_NAMES) {
                         val file = File(appContext.filesDir, "logs/$name")
                         if (file.isFile) {

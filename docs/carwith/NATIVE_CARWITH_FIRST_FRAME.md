@@ -55,3 +55,11 @@
 当前K30→API34 AVD测试：APK按ARM64安装启动成功，进程存活；前台位置权限问题已提出并待用户答复，未授予麦克风/后台位置等额外权限。真实硬件的BLE/HCI与P2P接入尚未建立，不能归因于旧手机不支持。此前HyperOS3→K30连接由用户主动断开，不记为稳定性失败。
 
 依据：[Android 9行为变化](https://developer.android.com/about/versions/pie/android-9.0-changes-all)、[API28前台服务要求](https://developer.android.com/about/versions/pie/android-9.0-changes-28)、[蓝牙权限](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions)、[Wi-Fi Direct](https://developer.android.com/develop/connectivity/wifi/wifi-direct)、[NDK最低API说明](https://developer.android.com/ndk/guides/sdk-versions)、[Google官方镜像目录](https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-4.xml)。
+
+## 已实现的独立接收条件预检
+
+`shared/.../carwith/NativeCarWithPreflight.kt`提供API28/31/33标准BLE/Wi-Fi发现权限分支及只读USB状态评估，`common/.../NativeCarWithDiagnostics.kt`在现有诊断导出中采集平台与USB接口条件。它区分USB host未报告、服务不可用/查询受限、等待设备、未观察到AOA模式、AOA数据接口缺失、设备授权缺失与AOA数据接口存在。普通厂商USB、ADB-only接口、跨接口拼凑的bulk IN/OUT和AOA音频专用PID均不算数据候选；输出只包含状态与数量，不含USB名称、路径、序列号或身份配置。它不扫描、授权、打开设备或发送AOA模式切换请求。接口存在仅表示可继续验证传输，不能证明CarWith兼容、认证或首帧。
+
+这些权限是标准发现API的预检条件，不是未知SDK的完整权限合同；USB状态与无线权限独立，位置权限缺失不会把USB接口评估判成失败。API28/31/33的Robolectric框架级测试覆盖对应Android版本分支及厂商服务异常；这些测试不替代实机验收；纯逻辑测试覆盖USB接口和设备授权边界。`WifiP2pGroupManager`目前只由CarPlay控制器调用，API28已有LocalOnlyHotspot选择分支，因此没有改动该类或将其称为原生接收后端。
+
+USB原生候选的静态证据：样本有`UCarAdapter.enableUsbDeviceDetection`、`IShareLinkManager.enableUsbDeviceScanning`、`MDevice.isWired`及`com.ucar.connect.aoa.UsbNative.nativeBulkRead/nativeBulkWrite`；K30 CarWith声明AOA附接/分离Activity。官方Emulator37.1.11有`-usb-passthrough`选项，但当前AVD未报告USB host特征，也未配置真实透传。下一步是正常USB枚举/应用授权→SDK有线初始化→认证→首帧；AOA是传输候选，不自动等同ICCOA协议成功。未强启手机隐藏Activity、发送AOA控制请求或改变Windows驱动。依据：[ICCOA有线/无线要求](https://www.iccoa.cn/tech/68.html)、[Android USB host](https://developer.android.com/develop/connectivity/usb/host)、[AOA规范](https://source.android.com/docs/core/interaction/accessories/aoa)。
