@@ -63,3 +63,8 @@
 这些权限是标准发现API的预检条件，不是未知SDK的完整权限合同；USB状态与无线权限独立，位置权限缺失不会把USB接口评估判成失败。API28/31/33的Robolectric框架级测试覆盖对应Android版本分支及厂商服务异常；这些测试不替代实机验收；纯逻辑测试覆盖USB接口和设备授权边界。`WifiP2pGroupManager`目前只由CarPlay控制器调用，API28已有LocalOnlyHotspot选择分支，因此没有改动该类或将其称为原生接收后端。
 
 USB原生候选的静态证据：样本有`UCarAdapter.enableUsbDeviceDetection`、`IShareLinkManager.enableUsbDeviceScanning`、`MDevice.isWired`及`com.ucar.connect.aoa.UsbNative.nativeBulkRead/nativeBulkWrite`；K30 CarWith声明AOA附接/分离Activity。官方Emulator37.1.11有`-usb-passthrough`选项，但当前AVD未报告USB host特征，也未配置真实透传。下一步是正常USB枚举/应用授权→SDK有线初始化→认证→首帧；AOA是传输候选，不自动等同ICCOA协议成功。未强启手机隐藏Activity、发送AOA控制请求或改变Windows驱动。依据：[ICCOA有线/无线要求](https://www.iccoa.cn/tech/68.html)、[Android USB host](https://developer.android.com/develop/connectivity/usb/host)、[AOA规范](https://source.android.com/docs/core/interaction/accessories/aoa)。
+
+
+## 后续平板失败诊断
+
+K30 Pro 向 Android15 平板接收端的本次尝试已取得独立媒体证据：1920×1152@30 的 AVC 解码器 configure 完成后，在 start 阶段报 NO_MEMORY，并触发10005。尺寸/能力不匹配是待验证假设；720p单变量验证尚未执行，USB不保证修复。现有Demo尺寸来自可见窗口计算，未确认应用内720p设置入口。详见[脱敏解码器失败记录与最小验证方案](NATIVE_CARWITH_CODEC_FAILURE.md)。本记录不改变此前 HyperOS3→K30 第三方接收端成功基线，也不宣称 DiPlay 原生链路通过。
