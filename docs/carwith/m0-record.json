@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "decision": "Blocked",
+  "reason": "No target phone/head unit, CarWith baseline or authorized reference receiver was available in this session. G0 has not passed.",
+  "next_step": "Provide the device/software matrix and an authorized receiver; run the parked/bench baseline in M0_REVIEW.md and submit reviewed evidence.",
+  "phone": {
+    "model": "", "region_rom": "", "hyperos": "", "android": "",
+    "carwith_version": "", "plugin_version": "", "installation_source": ""
+  },
+  "head_unit": {
+    "model": "", "firmware": "", "android": "", "display": "", "network_role": ""
+  },
+  "carwith_entry": "",
+  "reference_receiver": "",
+  "reference_version": "",
+  "reference_source": "",
+  "authorization_review": "",
+  "license_review": "",
+  "authentication_conditions": "",
+  "independent_carlife_comparison": "",
+  "test_environment": "",
+  "runs": []
+}
