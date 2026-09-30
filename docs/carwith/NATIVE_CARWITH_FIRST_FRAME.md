@@ -1,43 +1,38 @@
-# 原生 CarWith 首帧：当前阻塞与最短执行路径
+# 原生 CarWith 首帧：实机基线与 DiPlay 接入条件
 
-更新：2026-09-30。用户最新优先级为 **DiPlay 安卓车机应用直接接收原生 CarWith / ICCOA Carlink，摆脱外置盒**。CarLife 仅是兼容回退，暂停扩展其主线。此前“CarLife PoC 优先”的决定已被本次指令覆盖；原 [Project #1](https://github.com/users/xurunxin/projects/1) 字段和 Issues 未被关闭或改写。CarLife 画面不能作为原生链路验收。
+更新：2026-09-30。目标是 **DiPlay 安卓车机应用直接接收原生 CarWith / ICCOA Carlink，摆脱外置盒**；CarLife仅为兼容回退。原[Project #1](https://github.com/users/xurunxin/projects/1)字段和Issues未关闭或改写，CarLife画面不能作为原生验收。
 
-本轮新增：两个用户附件已完成静态分析，其中 `com.ucarhu.demo v1.2.2` 实际内嵌车端 SDK 和 ARM 媒体接收库；另一包是不同的 OPPO 生态应用。详见[APK 静态证据与最小 ARM PoC](ICCOA_APK_STATIC_ANALYSIS.md)。这更新了材料缺口判断，不代表原生 G0 通过。
+## 目前已证明什么
 
-## 实际核查
+用户单独批准安装运行经过哈希/签名/静态分析的 `com.ucarhu.demo v1.2.2`。它已在K30Pro/Android12/ARM64正常运行；用户确认 **HyperOS3手机的原生CarWith应用投屏、可听音频和触控操作正常**。只读工具观察到接收端前台/存活、四个本地SDK服务、RTSP200保活、持续推进的目标Surface呈现、目标音频播放器started和触控/UIBC发送活动。当前车辆显示名称为用户报告的“奇瑞风云2”。
 
-- 指定 checkout `X:\Projects\Code\DiPlay`，分支 `work/carwith-m0-evidence`；核查开始时干净，HEAD `0f8cebdf6d58ddbd6340f307d2c6309680609e92`。没有新克隆或覆盖用户改动。未发现 checkout/祖先的 AGENTS.md 或 `.agents/skills`。
-- ADB 实际只见已授权 Redmi K30 Pro（Android 12），当前安装的 CarWith `3.2.0-20241009` / code `103002000`。package dump 另列系统旧版 `1.0.18`，不代表另一台手机。新 HyperOS 3 手机未确认接入，型号/App 版本仍未知。
-- [官方历史手机列表](https://www.iccoa.cn/carlinkphonelist.html)明确包含 Redmi K30 Pro。新版案例页的 Android13/15 条件不能排除其历史经典投屏能力；当前 Android12/MIUI14/CarWith3.2 组合仍待真实验证，既非确认兼容，也非 No-Go。
-- 初次核查未找到车端 SDK。随后已完整读取用户上传的两个 APK：`com.ucarhu.demo v1.2.2` 可见 `UCarAdapter.init/startAdvertise/startCast`、本地 BLE/P2P/AP 服务与 ARM `libovmsink.so`；另一包 `com.heytap.opluscarlink 14.1.8` 没有该接收 SDK。已有真实实现线索，仍无独立授权 SDK、配置/状态合同或合法测试身份说明。APK留在私有分析目录，未安装、运行或复制进项目。
-- 官方公开前端使用 `category=standard/prd/guides&status=published`。本轮匿名读取 `/prod-api/system/article/list` 三类均 HTTP200、JSON **code401**，未取得文档正文。旧技术标准页是范围简介，非线协议。没有注册、联系厂商、登录或绕过认证；访问受限不证明技术必须外置盒，也不证明所有测试必须会员。
-- 宿主可见 Intel AX200 Wi-Fi（Disconnected）及有线网；未修改网络。未验证真实手机与 AVD 的射频/蓝牙/P2P 映射。本轮没有启动 AVD 或继续通用性能测试。
+这证明此设备/样本/身份组合存在无需外置盒的软件接收路径。**DiPlay自身仍未接入真实SDK，未完成自己的发现、鉴权或首帧。** 完整版本、链路模式、独立认证回调、延迟/掉帧和625级性能仍未验证。详细区分用户确认、工具证据、身份/车名兼容假设及执行边界见[实机基线](NATIVE_CARWITH_DEVICE_BASELINE.md)和[脱敏记录](evidence/native-third-party-baseline.json)。
 
-## 当前停在哪一层
+## 实际材料与环境
 
-| 阶段 | 实际结果 | 进入下一步的最小条件 |
+- 指定checkout `X:\Projects\Code\DiPlay`、既有分支 `work/carwith-m0-evidence`，保留用户改动；未新克隆，未发现checkout/祖先AGENTS.md或`.agents/skills`。
+- ADB实际可见且已授权的K30Pro为本次接收端；其原CarWith3.2并非本次发送应用。发送端由用户确认为HyperOS3/CarWith，未确认具体型号、OS/App版本或ADB连接，不能把旧手机版本当作成功发送端版本。
+- 两附件完整材料化并完成[静态分析](ICCOA_APK_STATIC_ANALYSIS.md)。接收APK内有 `UCarAdapter.init/startAdvertise/startCast`、本地BLE/P2P/AP服务和ARM媒体库；另一`com.heytap.opluscarlink 14.1.8`不是该接收SDK升级版。未将第三方二进制/源码/身份材料提交仓库。
+- 官方历史列表包含K30Pro，支持其历史兼容调查，但本次K30Pro作为接收端成功不验证其Android12/CarWith3.2发送能力。旧案例Android版本条件同样不能替代实测。
+- 官方车端SDK应用进程内架构与公开标准列表匿名code401的既有观察见[软件接收研究](ICCOA_SOFTWARE_RECEIVER.md)；资料受限不证明必须连接盒。未注册、联系厂商、接受条款或绕过认证。
+- 接收APK的媒体库只有ARM32/ARM64；x86_64 USB库不能证明x86媒体SDK可用。此前AVD已关闭，本次未更改CPU亲和性或系统网络/安全设置。
+
+## 逐阶段状态
+
+| 阶段 | 第三方样本基线 | DiPlay状态 / 最小条件 |
 | --- | --- | --- |
-| SDK加载/初始化 | 未执行：APK中已见车端 API 和 ARM 库，尚非已授权可集成 SDK | ARM受控台架、合法测试/集成依据、配置与状态说明；未知APK运行另需批准 |
-| 原生发现 | **未进入**，已见 `startAdvertise`、BLE/P2P/AP结构；没有真实扫描结果 | 完成真实初始化与权限验证，并获得SDK合同或完整服务/广播字段、角色、版本及时序规范 |
-| 系统配对/无线链路 | 未执行 | 明确由SDK或宿主管理、蓝牙/P2P/AP角色；在所需操作获准后走官方流程 |
-| 身份认证/握手 | 未执行，没有认证失败码 | SDK实际认证合同；若要求测试身份、签名、证书或激活，提供合法provisioning材料。当前不能假定它必需专用硬件或可以省略 |
-| 媒体协商 | 未执行 | 真实SDK Surface/压缩帧回调、codec/config/PTS合同 |
-| 首帧 | **未取得任何原生 CarWith 帧** | 经上述真实链路收到的视频交给SDK Surface或DiPlay媒体末端；记录实际回调/渲染证据 |
+| 加载/初始化 | ARM64应用运行、SDK服务和媒体呈现已观察；未单独保留初始化回调 | 未接入；需要可集成SDK/依赖和真实配置/状态合同，或足够的独立互操作规范 |
+| 原生发现/配对 | 用户连接成功，未单独捕获发现/配对时序 | 未执行；使用实际API/字段合同与正常系统配对流程，不猜UUID/身份 |
+| 身份认证 | 用户确认端到端成功，工具观察保活；没有独立认证回调证据 | 未执行；明确CCD/合法测试身份来源与认证合同，不能复制样本身份 |
+| 会话/视频 | RTSP200保活、目标Surface有效呈现并推进；用户确认投屏 | 未执行；真实SDK单Surface或压缩帧合同、协商和生命周期 |
+| 首帧/输入/音频 | 用户确认画面、正常触控、可听音频；相关工具状态支持 | DiPlay首帧/输入/音频未实现验收，须真实重复连接验证 |
+| 持续性能 | 只有K30Pro短呈现窗口约33.45ms中位间隔 | 非稳定FPS/掉帧/延迟或625级验收；待DiPlay视频链路后测 |
 
-已有 debug AVC fixture 只证明合成视频解码与取消恢复，不属于本表的发现、认证或首帧进展。本轮不新增猜测的UUID、端口、广播身份、认证协议、占位后端或更多基准来替代这些缺项。
+## 下一步实施顺序
 
-## 可合法参考什么
+1. 核实独立SDK及许可、初始化示例/状态码、ABI/后装APK要求，以及CCD配置/合法测试身份来源。方法签名已见，完整合同仍未知。APK可下载或运行不意味着可将其SDK/身份再分发进GPL项目。
+2. **优先调查兼容列表**：当前“奇瑞风云2”可能关联显示名称，也可能关联厂商/产品ID、协议能力或认证身份。先取得允许自定义字段与获准测试身份的合同，使用合法单变量对照；不改当前连接配置、不克隆车辆身份、不把换车名当已证实解法。
+3. 在DiPlay隔离debug后端按真实合同实现 `init → startAdvertise → 正常配对/认证回调 → startCast(Surface)`；状态机与超时、Surface生命周期、disconnect/deInit、音频焦点和触控映射分别处理。不导入未知许可二进制，不让第三方样本成功直接改变DiPlay成功状态。
+4. 先在ARM接收台架复现DiPlay自己的第一帧，并重复连接/输入/可听音频，再做断线恢复、持续视频与625级性能。x86只有获准媒体ABI/真实无线映射后才进入同类验收。
 
-[官方 SDK 政策](https://www.iccoa.cn/suit_1.html)与[安全说明](https://www.iccoa.cn/suit_2.html)明确车端 SDK 嵌入应用并在应用进程运行。这支持 DiPlay 内嵌软件接收器方向，但不确定普通后装 APK 的签名/权限、ABI、身份和许可。
-
-公开源码候选仍须分清：数字钥匙仓库不是投屏；依赖 CPC200-CCPA 的 Carlink 工程是 host-dongle；`ICCOA-tool` 只是启动已有接收APP的工具。既有 GPL 工程不能因为一个未知许可的 APK 可下载就获得 SDK 集成权。没有把这些候选安装、提取身份或导入 DiPlay。详见 [分层接入审查](ICCOA_SOFTWARE_RECEIVER.md)。本轮公开仓库查询 `iccoa is:public` 得到8项；新增候选 [Hyggec/iccoavoice](https://github.com/Hyggec/iccoavoice) 的README说明它是语音测试网页，不是可验证的发现/认证接收实现，且未识别许可证。检索未找到可信可集成实现，不等于不存在可授权方案。
-
-## 取得材料后立即执行的首帧计划
-
-1. **先要一套可用车端测试 SDK**（AAR/JAR/so及依赖）和**最小初始化/发现示例、对应测试许可**。不必一开始就取得所有协议正文；SDK可以承担未知的线协议。完整独立实现则另需发现、握手与媒体规范。未明确重分发权时 SDK/身份只留私有工作区，不进入公开 PR。
-2. 核实 SDK minSdk、进程 ABI、后装APK/系统签名要求与必要权限，确认它支持 K30 Pro 的历史协议版本。x86_64 可用则在现有 AVD 做加载实验；只有 ARM 时，使用支持该 ABI 的授权真实安卓车机，不把加载失败当协议不兼容。ARM64 出现在 AVD 的 advertised ABI 列表也不证明真实 ARM 验收。
-3. 在 DiPlay 隔离 debug 接入页使用真实 SDK API 初始化、开始发现、记录 SDK 原始阶段码的最小白名单；SDK需身份或额外权限时在该阶段停下，明确所需材料/批准。先用已接入的 K30 Pro；不要求用户为尚不存在的接收端重复找手机入口。
-4. 手机实际发现 DiPlay 后，按SDK规定配对与认证；记录“发现”“链路建立”“认证成功”各自证据，不能把TCP连接当认证。没有认证成功不进入媒体成功状态。
-5. 按真实合同绑定单Surface或压缩帧适配器，拿到**第一帧**及首帧时间；两次重复原生连接后再延伸持续视频/输入/音频/重连，最后回归CarPlay。CarLife模式和本地fixture均不得计入原生结果。
-
-**当前最小条件已缩小为合法SDK/样本测试依据、ARM接收台架、初始化配置与状态说明。** 样本可见API不足以确认CCD/身份生成方式和普通APK权限；先按[静态分析中的ARM PoC](ICCOA_APK_STATIC_ANALYSIS.md)核实，再接入DiPlay。无需购买连接盒，不能复制样本身份。用户未授权申请账号、接受条款、联系厂商、安装未知接收包或改手机安全设置；本任务未做这些动作。
+**当前关键缺项从“是否有可运行软件接收端”收敛为“如何合法、独立地接入DiPlay，以及哪些配置/身份/兼容限制必须满足”。** 已有合成AVC与UI基准仍只是基础证据；原CarLife回退记录和Project状态不因本次第三方样本成功自动完成。

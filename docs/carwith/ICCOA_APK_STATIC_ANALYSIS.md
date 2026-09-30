@@ -2,6 +2,8 @@
 
 日期：2026-09-30。目标仍为 DiPlay 安卓车机应用原生接收 CarWith / ICCOA Carlink，CarLife 仅回退。本次只读 APK 的 ZIP、Manifest、DEX 元数据/调用目标和 ELF 依赖；**没有安装或运行任何样本，没有发现/配对/认证/首帧成功证据**。
 
+后续运行更新：本文为安装前静态快照。用户之后单独批准运行，K30Pro上的样本已成功接收HyperOS3原生CarWith，音频/触控由用户确认，工具取得有限会话/呈现证据。当前状态与车辆名称兼容假设见[实机基线](NATIVE_CARWITH_DEVICE_BASELINE.md)；本文的“未安装/运行”和阶段未执行结论仅指静态分析时点，不能作为当前运行状态。
+
 ## 来源、身份和可复核性
 
 用户指定[车友社区条目](https://www.bydmax.com/apps/3292.html)，页面标题“ICCOA Carlink 车机端”，日期 2023-11-03；随后提供[夸克分享](https://pan.quark.cn/s/b2db8990060c#/list/share)，并直接上传两个 APK。页面是第三方社区，不能据此证明开发者身份、完整发布链或 SDK 授权。论坛 2026 修改版和此样本不是同一版本。
