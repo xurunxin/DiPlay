@@ -43,13 +43,21 @@ internal object NativeCarWithDiagnostics {
             runCatching { context.checkSelfPermission(permission) }
                 .getOrDefault(PackageManager.PERMISSION_DENIED) != PackageManager.PERMISSION_GRANTED
         }.sorted()
+        val limit = CarWithVideoPreferences.loadLimit(context)
+        val videoPlan = CarWithVideoCapabilities.plan(limit)
         return buildString {
             appendLine("Native CarWith: backend not integrated; discovery/authentication/first frame unverified")
             appendLine("Receiver platform: API=$api minimum=${NativeCarWithPreflight.MIN_API}")
             appendLine("USB preflight: ${usb.state}; attached=${usb.attachedDevices} AOA-data=${usb.aoaDataDevices} authorized=${usb.authorizedDataDevices}")
             appendLine("AOA interface presence does not verify CarWith compatibility or authentication.")
             appendLine("Standard wireless discovery missing permissions: ${missing.joinToString().ifEmpty { "none" }}")
-            append("Permissions alone do not verify radio support, reachability or SDK requirements.")
+            appendLine("Permissions alone do not verify radio support, reachability or SDK requirements.")
+            appendLine("CarWith video maximum: $limit; capability evidence: ${videoPlan.evidence}")
+            appendLine("Local AVC selection: ${videoPlan.selected ?: "none"}; display pixels are not a video request")
+            videoPlan.candidates.forEach { candidate ->
+                appendLine("Candidate: ${candidate.mode}; decoder=${candidate.decoder.name}; profile/max-level=${candidate.profileLevels}")
+            }
+            append("Native video stages: capabilities not published; negotiated=none; decoder configured=none; backend not integrated")
         }
     }
 }

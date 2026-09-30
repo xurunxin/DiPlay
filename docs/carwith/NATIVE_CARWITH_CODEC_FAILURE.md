@@ -43,7 +43,9 @@ SDK 媒体边界的静态结构证据：
 
 缺项为完整 SDK 异常栈、`CodecException.getDiagnosticInfo()/getErrorCode()`、视频 level、运行时 MediaCodecList 的 profile/level/尺寸/帧率支持。异常数字状态被首次隐私过滤遮盖；现存目标应用日志未重新取回该错误行，不填推测数字。被动采集已在13:15:36 UTC结束，没有要求再次复现、清日志、重启或修改系统设置。
 
-## 最小下一步与 DiPlay 接入要求
+## 当时建议与后续开发选择
+
+**后续用户决定：停止第三方Demo测试、取消待批独立诊断APK，转为开发DiPlay自有分辨率策略。以下探针/第三方复现建议不再待执行；当前实现与原生协商边界见[自有视频策略](NATIVE_CARWITH_VIDEO_POLICY.md)。**
 
 1. 使用独立的第一方 debug 诊断构建，只查询实际 `MediaCodecList`、AVC `profileLevels`、`VideoCapabilities` 及 `isFormatSupported/areSizeAndRateSupported`。不含第三方 SDK/身份材料，不申请定位、录音、媒体文件或网络权限。**在新平板安装运行这个新 APK 需要明确批准，尚未执行。**能力查询通过也不是 codec 启动或首帧验收。
 2. 若获得有许可、允许调整协商参数的原生接收测试端，将视频请求设为 **1280×720@30**，保持低延迟 false、其余连接参数一致；比较启动和首帧结果。当前 Demo 的正常设置路径未确认，不能通过系统改分辨率或修改第三方 APK冒充这项验证。独立本地解码 fixture 可隔离 codec 启动问题，但不证明 CarWith 协商或投屏成功。

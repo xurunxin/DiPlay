@@ -262,6 +262,15 @@ class DiPlayActivity : ComponentActivity() {
                 AirPlayPersistence.saveHideTopBar(this, it); AirPlayPersistence.saveHideBottomBar(this, it)
             }
         }
+        section(content, getString(R.string.carwith_video_settings)) { card ->
+            val limits = com.shilapi.xcertplay.carwith.CarWithVideoPolicy.Limit.entries
+            choice(card, getString(R.string.carwith_video_maximum),
+                listOf(getString(R.string.carwith_video_720p), getString(R.string.carwith_video_1080p)),
+                limits.indexOf(CarWithVideoPreferences.loadLimit(this)), reconnectCarPlay = false) {
+                CarWithVideoPreferences.saveLimit(this, limits[it])
+            }
+            card.addView(label(getString(R.string.carwith_video_pending), 14, MUTED))
+        }
         section(content, getString(R.string.audio_routing)) { card ->
             val channelTitle = label(getString(R.string.navigation_stream_type), 18, TEXT, true)
             val channelHint = label(getString(R.string.tap_a_number_to_test_14_driver_speaker_on_byd), 14, MUTED)
@@ -985,19 +994,19 @@ class DiPlayActivity : ComponentActivity() {
         line.addView(Switch(this).apply { contentDescription = title; isChecked = value; minHeight = dp(56); buttonTintList = ColorStateList.valueOf(ACCENT); setOnCheckedChangeListener { _, checked -> save(checked) } })
         parent.addView(line)
     }
-    private fun choice(parent: LinearLayout, title: String, options: List<String>, current: Int, save: (Int) -> Unit) {
+    private fun choice(parent: LinearLayout, title: String, options: List<String>, current: Int, reconnectCarPlay: Boolean = true, save: (Int) -> Unit) {
         var selection = current
         val button = button("$title · ${options[selection]}", false) {}
         button.setOnClickListener {
             var pendingSelection = selection
             AlertDialog.Builder(this).setTitle(title)
                 .setSingleChoiceItems(options.toTypedArray(), selection) { _, index -> pendingSelection = index }
-                .setPositiveButton(if (CarPlayBackgroundSession.hasSession()) getString(R.string.apply_and_reconnect) else getString(R.string.save)) { _, _ ->
+                .setPositiveButton(if (reconnectCarPlay && CarPlayBackgroundSession.hasSession()) getString(R.string.apply_and_reconnect) else getString(R.string.save)) { _, _ ->
                     if (pendingSelection != selection) {
                         selection = pendingSelection
                         save(selection)
                         button.text = "$title · ${options[selection]}"
-                        if (CarPlayBackgroundSession.hasSession()) {
+                        if (reconnectCarPlay && CarPlayBackgroundSession.hasSession()) {
                             connect(AirPlayPersistence.loadWirelessEnabled(this))
                         }
                     }

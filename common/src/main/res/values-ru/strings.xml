@@ -408,4 +408,9 @@
     <string name="turn_card_horizontal">Карточка поворота · по горизонтали</string>
     <string name="turn_card_vertical">Карточка поворота · по вертикали</string>
     <string name="reset_turn_card_to_centre">Вернуть карточку поворота в центр</string>
+    <string name="carwith_video_settings">Видео CarWith</string>
+    <string name="carwith_video_maximum">Максимальное разрешение видео</string>
+    <string name="carwith_video_720p">720p (по умолчанию)</string>
+    <string name="carwith_video_1080p">1080p</string>
+    <string name="carwith_video_pending">Подключение CarWith пока недоступно. Этот предел сохраняется для выбора возможностей приёмника.</string>
 </resources>

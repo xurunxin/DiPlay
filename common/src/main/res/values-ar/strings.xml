@@ -408,4 +408,9 @@
     <string name="turn_card_horizontal">بطاقة الانعطاف · أفقيًا</string>
     <string name="turn_card_vertical">بطاقة الانعطاف · عموديًا</string>
     <string name="reset_turn_card_to_centre">إعادة بطاقة الانعطاف إلى الوسط</string>
+    <string name="carwith_video_settings">فيديو CarWith</string>
+    <string name="carwith_video_maximum">الحد الأقصى لدقة الفيديو</string>
+    <string name="carwith_video_720p">720p (افتراضي)</string>
+    <string name="carwith_video_1080p">1080p</string>
+    <string name="carwith_video_pending">اتصال CarWith غير متاح بعد. يُحفظ هذا الحد لاختيار قدرات جهاز الاستقبال.</string>
 </resources>

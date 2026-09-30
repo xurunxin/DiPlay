@@ -68,3 +68,8 @@ USB原生候选的静态证据：样本有`UCarAdapter.enableUsbDeviceDetection`
 ## 后续平板失败诊断
 
 K30 Pro 向 Android15 平板接收端的本次尝试已取得独立媒体证据：1920×1152@30 的 AVC 解码器 configure 完成后，在 start 阶段报 NO_MEMORY，并触发10005。尺寸/能力不匹配是待验证假设；720p单变量验证尚未执行，USB不保证修复。现有Demo尺寸来自可见窗口计算，未确认应用内720p设置入口。详见[脱敏解码器失败记录与最小验证方案](NATIVE_CARWITH_CODEC_FAILURE.md)。本记录不改变此前 HyperOS3→K30 第三方接收端成功基线，也不宣称 DiPlay 原生链路通过。
+
+
+## 已实现的自有视频能力选择
+
+用户停止第三方Demo测试并取消待批探针，转为DiPlay开发。本地AVC策略现已依据实际decoder能力筛选720p/1080p，提供独立用户上限（默认720p）、未验证保守预案，以及发布/最终协商/实际配置的分阶段守卫；已接入设置和诊断。尚未接入原生SDK向手机发布能力或执行真实重协商，不是原生首帧完成。详见[自有策略、测试和SDK映射边界](NATIVE_CARWITH_VIDEO_POLICY.md)。

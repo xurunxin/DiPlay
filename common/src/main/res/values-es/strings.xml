@@ -408,4 +408,9 @@
     <string name="turn_card_horizontal">Tarjeta de giro · horizontal</string>
     <string name="turn_card_vertical">Tarjeta de giro · vertical</string>
     <string name="reset_turn_card_to_centre">Centrar la tarjeta de giro</string>
+    <string name="carwith_video_settings">Vídeo de CarWith</string>
+    <string name="carwith_video_maximum">Resolución máxima de vídeo</string>
+    <string name="carwith_video_720p">720p (predeterminado)</string>
+    <string name="carwith_video_1080p">1080p</string>
+    <string name="carwith_video_pending">La conexión CarWith aún no está disponible. Este límite se guarda para seleccionar las capacidades del receptor.</string>
 </resources>
