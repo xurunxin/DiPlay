@@ -20,6 +20,8 @@
 
 建议保持原 CarLife G0 为 Blocked，将原 #15 R1 的官方接入可行性研究与亿连授权接收端核验并列评估。亿连对 CarWith 的公开兼容证据更直接；ICCOA 适合研究系统级接入，需先拿到实际技术条件。目前没有证据足以选定产品后端。可先向已有授权供应商索取资料；对外联系、申请、费用、同意条款、安装新接收端与网络变更仍需明确授权。本次没有改 Project 范围。最小缺项为：当前 CarWith 版本矩阵、合法测试接收端/SDK、ABI/API支持、认证与链路说明、测试和集成许可。若模拟器不受支持，可用已授权且兼容的真实车机先证明链路。
 
+独立R1能力边界、当前代码契合度与研究准入结论见 [ICCOA ADR](ICCOA_ADR.md)。
+
 ## 实际 AVD 配置与边界
 
 用户已批准通过官方 sdkmanager 安装 Emulator 并创建测试 AVD。已安装 Emulator 37.1.11（15917651），WHPX 可用；新建隔离 `DiPlay_G0_API34`，使用已有 Android 34 / Google Play / x86_64 镜像 revision 14。原有其他 AVD 未修改。主机为 i5-13600KF（14核/20逻辑CPU），物理内存 68,523,835,392 bytes。AVD 为 headless、无音频、无快照、SwiftShader 软件渲染，实际屏幕 override 1280×720 / 240 dpi，配置60Hz。
