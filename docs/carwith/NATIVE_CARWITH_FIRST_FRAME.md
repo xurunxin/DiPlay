@@ -15,7 +15,7 @@
 - 两附件完整材料化并完成[静态分析](ICCOA_APK_STATIC_ANALYSIS.md)。接收APK内有 `UCarAdapter.init/startAdvertise/startCast`、本地BLE/P2P/AP服务和ARM媒体库；另一`com.heytap.opluscarlink 14.1.8`不是该接收SDK升级版。未将第三方二进制/源码/身份材料提交仓库。
 - 官方历史列表包含K30Pro，支持其历史兼容调查，但本次K30Pro作为接收端成功不验证其Android12/CarWith3.2发送能力。旧案例Android版本条件同样不能替代实测。
 - 官方车端SDK应用进程内架构与公开标准列表匿名code401的既有观察见[软件接收研究](ICCOA_SOFTWARE_RECEIVER.md)；资料受限不证明必须连接盒。未注册、联系厂商、接受条款或绕过认证。
-- 接收APK的媒体库只有ARM32/ARM64；x86_64 USB库不能证明x86媒体SDK可用。此前AVD已关闭，本次未更改CPU亲和性或系统网络/安全设置。
+- 接收APK的媒体库只有ARM32/ARM64；x86_64 USB库不能证明x86媒体SDK可用。API34 AVD现已启动，并经用户单独批准安装运行接收APK；选择ARM64 ABI后进程存活，停在位置权限弹窗，SDK初始化及真实无线连接尚未验证。未更改CPU亲和性或系统网络/安全设置。
 
 ## 逐阶段状态
 
@@ -36,3 +36,22 @@
 4. 先在ARM接收台架复现DiPlay自己的第一帧，并重复连接/输入/可听音频，再做断线恢复、持续视频与625级性能。x86只有获准媒体ABI/真实无线映射后才进入同类验收。
 
 **当前关键缺项从“是否有可运行软件接收端”收敛为“如何合法、独立地接入DiPlay，以及哪些配置/身份/兼容限制必须满足”。** 已有合成AVC与UI基准仍只是基础证据；原CarLife回退记录和Project状态不因本次第三方样本成功自动完成。
+
+## Android 9 / API28 接收端验收基线
+
+用户明确要求兼容Android 9车机。`mobile/common/shared/automotive`当前均为`minSdk=28`；接入不得无声提高此值。更低系统仅评估，不降低最低版本或承诺支持。API34 AVD与Android12接收实机的结果均不能代替API28验收。
+
+| 检查面 | 已审查证据与实施要求 | API28验收 |
+| --- | --- | --- |
+| SDK / Java API | 第三方样本Manifest为min24/target30；已见`startAdvertisingSet`、`MediaCodec.setCallback/setOutputSurface`等API28以前的接口，但这不是完整DEX可达性证明。真实SDK必须提供最低版本及版本分支，测试所有启动、连接、退出路径；反射/非SDK接口单独审查 | ARM车机冷启动、初始化和退出无链接、缺方法/类或权限错误；不能靠提高minSdk通过 |
+| native / ABI | 两个ARM ABI的`libovmsink.so/libusbio.so`Android ELF note均标记API27、NDK r21b。用现有NDK28.2的API28 `liblog/libm/libdl/libc`导出表对照，各库强未定义符号未发现缺项；未校验符号版本、运行时`dlopen/dlsym`或所有代码路径。min24声明、构建标记及符号检查均不是运行通过 | 分别核实目标车机ARM32/ARM64 ABI及完整依赖，实际加载、首帧、断开重连；不把x86 USB库当作x86媒体SDK |
+| BLE / Wi-Fi权限 | API28使用旧`BLUETOOTH/BLUETOOTH_ADMIN`及扫描所需位置权限；不能只实现API31+Nearby Devices或API33+Nearby Wi-Fi请求。定位开关、拒绝权限、硬件广播能力及非SDK限制须显式处理 | 经用户授权正常发现/配对；拒绝权限可恢复，不自动改变安全设置或申请系统签名权限 |
+| P2P / AP | 现有`WifiP2pGroupManager.start`主动要求API29+，不能原样复用到28；这是本项目可控凭据实现的限制，不是Android9缺少P2P。原生SDK自己的`initialize/createGroup/requestGroupInfo`路径须按合同验证；LocalOnlyHotspot/车机热点仅在协议支持时选用 | 普通应用权限下验证真实GO/客户端或协议允许的AP模式，记录厂商限制；不得绕过隐藏API或假造连接状态 |
+| 视频 / 音频 | 已有`AndroidMediaSink`按API29保护`isSoftwareOnly`、按API30保护低延迟特性；API28走普通MediaCodec与AudioTrack路径。SDK硬解profile/level、分辨率、音频格式及采样率必须实测，不从Android版本推断硬解能力 | 先协商双方支持的AVC/音频参数，取得首帧、可听音频和触控响应；HEVC或特定参数不可用时只使用真实协议允许的降级 |
+| 前台服务 / 生命周期 | `common`已声明`FOREGROUND_SERVICE`，`DiPlaySessionService`在28使用双参数`startForeground`，29+才传服务类型。原生后端接入仍须核实自己的服务、通知、Surface重建、音频焦点和资源释放 | 前后台切换、Surface销毁重建、断线恢复、用户停止和车机休眠恢复；API28后台麦克风限制不以强授权限绕过 |
+
+本机目前只有API34镜像。Google官方镜像目录确有`system-images;android-28;google_apis;x86_64`（压缩下载1,102,721,597字节），可作为申请新增安装后的Java/API与生命周期检查台架；另需解压及独立AVD数据空间。当前未安装、未接受新条款。镜像是否提供ARM转译必须安装后另验，不能继承API34结论；API28模拟器也不能替代真实无线电或ARM车机硬解验收。最终需要至少一个API28 ARM车机/台架完成原生发现→认证→首帧及音频、触控、生命周期验证。625级性能只在实际视频链路建立后测量。
+
+当前K30→API34 AVD测试：APK按ARM64安装启动成功，进程存活；前台位置权限问题已提出并待用户答复，未授予麦克风/后台位置等额外权限。真实硬件的BLE/HCI与P2P接入尚未建立，不能归因于旧手机不支持。此前HyperOS3→K30连接由用户主动断开，不记为稳定性失败。
+
+依据：[Android 9行为变化](https://developer.android.com/about/versions/pie/android-9.0-changes-all)、[API28前台服务要求](https://developer.android.com/about/versions/pie/android-9.0-changes-28)、[蓝牙权限](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions)、[Wi-Fi Direct](https://developer.android.com/develop/connectivity/wifi/wifi-direct)、[NDK最低API说明](https://developer.android.com/ndk/guides/sdk-versions)、[Google官方镜像目录](https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-4.xml)。
