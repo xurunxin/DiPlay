@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "app_version": "0.2.6-hud-test",
+  "android_api": 34,
+  "abis": [
+    "x86_64",
+    "arm64-v8a"
+  ],
+  "total_ram_bytes": 2595385344,
+  "process_java_heap_limit_bytes": 201326592,
+  "declared_features_not_connectivity_tests": {
+    "android.hardware.wifi.direct": true,
+    "android.hardware.bluetooth": true,
+    "android.hardware.bluetooth_le": true
+  },
+  "decoder_capabilities_not_performance_proof": [
+    {
+      "name": "c2.goldfish.h264.decoder",
+      "mime": "video/avc",
+      "declared_hardware_accelerated": true,
+      "declared_software_only": false,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.goldfish.hevc.decoder",
+      "mime": "video/hevc",
+      "declared_hardware_accelerated": true,
+      "declared_software_only": false,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.android.avc.decoder",
+      "mime": "video/avc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "OMX.google.h264.decoder",
+      "mime": "video/avc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.android.hevc.decoder",
+      "mime": "video/hevc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "OMX.google.hevc.decoder",
+      "mime": "video/hevc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    }
+  ],
+  "is_carwith_session": false,
+  "is_snapdragon_625_validation": false,
+  "fixture": "synthetic-avc-1280x720-30fps-300frames-no-audio",
+  "mode": "unpaced decode to Surface; throughput is not displayed FPS",
+  "selected_decoder": "c2.goldfish.h264.decoder",
+  "status": "passed",
+  "input_frames": 300,
+  "decoded_output_frames": 300,
+  "output_eos": true,
+  "frame_rendered_callbacks": 300,
+  "configure_to_output_eos_seconds": 4.6536217,
+  "unpaced_output_frames_per_second": 64.46591909264991,
+  "queue_to_surface_latency_sample_count": 0,
+  "latency_scope": "local queue to framework Surface timestamp; not glass-to-glass or touch latency",
+  "completed_at_epoch_ms": 1790749041333,
+  "requested_profile": "low_resource",
+  "host_source_apk_sha256": "e3ead3797a3da66235f81db531057ca8d32a7a6a3c95ba06b1e5db62ec8c8171"
+}

@@ -1,0 +1,74 @@
+{
+  "observed_at_utc": "2026-09-30T09:02:23.309685+00:00",
+  "receiver": {
+    "model": "Redmi K30 Pro",
+    "android": "12",
+    "package": "com.ucarhu.demo",
+    "versionName": "v1.2.2",
+    "versionCode": 2023,
+    "process_abi": "arm64-v8a",
+    "apk_sha256": "eb15e5a62cea12c1ecb8bf0e20f8c5369fb6eaa34820720130c3b6073053a3e3",
+    "installation": "user-confirmed normal adb installation; no replace/downgrade/grant flags",
+    "cold_activity_start_total_ms": 404,
+    "cold_activity_start_wait_ms": 414
+  },
+  "sender": {
+    "os_family": "HyperOS 3",
+    "projection_app": "CarWith",
+    "model": null,
+    "exact_os_version": null,
+    "carwith_version": null,
+    "usb_adb_seen": false
+  },
+  "user_confirmed": {
+    "native_carwith_to_k30_receiver": true,
+    "application_projection": true,
+    "audible_audio": true,
+    "touch_operates_projected_apps": true,
+    "reported_vehicle_display_name": "奇瑞风云2"
+  },
+  "tool_observed": {
+    "receiver_alive_foreground": true,
+    "active_local_sdk_services": [
+      "com.share.connect.ShareLinkService",
+      "com.share.connect.ble.BluetoothLeService",
+      "com.share.connect.wifiap.WifiApService",
+      "com.share.connect.wifip2p.WifiP2pService"
+    ],
+    "own_pid_rtsp_keepalive_response_200": true,
+    "own_pid_keepalive_samples": 8,
+    "valid_target_surface_present_records": 127,
+    "target_surface_present_advanced": true,
+    "short_window_median_present_interval_ms": 33.449506,
+    "target_audio_player_state": "started",
+    "touch_send_marker_samples": 142,
+    "uibc_marker_samples": 285,
+    "permissions": {
+      "BLUETOOTH_PRIVILEGED": "not_listed_as_granted",
+      "LOCAL_MAC_ADDRESS": "not_listed_as_granted",
+      "NETWORK_SETTINGS": "not_listed_as_granted",
+      "NETWORK_STACK": "not_listed_as_granted",
+      "TETHER_PRIVILEGED": "not_listed_as_granted",
+      "OVERRIDE_WIFI_CONFIG": "not_listed_as_granted",
+      "MANAGE_USB": "not_listed_as_granted",
+      "RECORD_AUDIO": "true",
+      "ACCESS_FINE_LOCATION": "true",
+      "ACCESS_BACKGROUND_LOCATION": "false",
+      "WRITE_EXTERNAL_STORAGE": "true"
+    }
+  },
+  "limits": {
+    "diplay_native_backend_connected": false,
+    "authentication_callback_independently_captured": false,
+    "first_frame_latency_measured": false,
+    "stable_fps_or_drop_rate_measured": false,
+    "end_to_end_latency_measured": false,
+    "snapdragon625_performance_measured": false,
+    "transport_mode_confirmed": false,
+    "vehicle_name_allowlist_proven": false,
+    "sdk_redistribution_permission_verified": false
+  },
+  "compatibility_hypothesis": "display name may be whitelisted, or vendor/product IDs, protocol version/capabilities, or credential identity may govern acceptance; no configuration changes or identity extraction/cloning",
+  "privacy": "no raw logs, screenshots, radio identifiers, credentials, private app data or sender frame contents saved; only whitelisted aggregate observations",
+  "session_preservation": "after successful projection, no installation, restart, force-stop, disconnect, injected touch, audio or network settings changes"
+}

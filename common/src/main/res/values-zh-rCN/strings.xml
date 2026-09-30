@@ -419,4 +419,9 @@
     <string name="turn_card_horizontal">转向提示卡 · 水平位置</string>
     <string name="turn_card_vertical">转向提示卡 · 垂直位置</string>
     <string name="reset_turn_card_to_centre">将转向提示卡重置到中央</string>
+    <string name="carwith_video_settings">CarWith 视频</string>
+    <string name="carwith_video_maximum">视频分辨率上限</string>
+    <string name="carwith_video_720p">720p（默认）</string>
+    <string name="carwith_video_1080p">1080p</string>
+    <string name="carwith_video_pending">CarWith 连接尚未启用。此上限将用于接收能力选择。</string>
 </resources>

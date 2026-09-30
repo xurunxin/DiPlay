@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "app_version": "0.2.6-hud-test",
+  "android_api": 34,
+  "abis": [
+    "x86_64",
+    "arm64-v8a"
+  ],
+  "total_ram_bytes": 2594942976,
+  "process_java_heap_limit_bytes": 201326592,
+  "declared_features_not_connectivity_tests": {
+    "android.hardware.wifi.direct": true,
+    "android.hardware.bluetooth": true,
+    "android.hardware.bluetooth_le": true
+  },
+  "decoder_capabilities_not_performance_proof": [
+    {
+      "name": "c2.goldfish.h264.decoder",
+      "mime": "video\/avc",
+      "declared_hardware_accelerated": true,
+      "declared_software_only": false,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.goldfish.hevc.decoder",
+      "mime": "video\/hevc",
+      "declared_hardware_accelerated": true,
+      "declared_software_only": false,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.android.avc.decoder",
+      "mime": "video\/avc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "OMX.google.h264.decoder",
+      "mime": "video\/avc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "c2.android.hevc.decoder",
+      "mime": "video\/hevc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    },
+    {
+      "name": "OMX.google.hevc.decoder",
+      "mime": "video\/hevc",
+      "declared_hardware_accelerated": false,
+      "declared_software_only": true,
+      "declared_720p30_supported": true
+    }
+  ],
+  "is_carwith_session": false,
+  "is_snapdragon_625_validation": false,
+  "fixture": "synthetic-avc-1280x720-30fps-300frames-no-audio",
+  "mode": "unpaced decode to Surface; throughput is not displayed FPS",
+  "selected_decoder": "c2.goldfish.h264.decoder",
+  "status": "cancelled",
+  "input_frames": 28,
+  "decoded_output_frames": 24,
+  "output_eos": false,
+  "frame_rendered_callbacks": 24,
+  "configure_to_output_eos_seconds": 1.035457125,
+  "queue_to_surface_latency_sample_count": 0,
+  "latency_scope": "local queue to framework Surface timestamp; not glass-to-glass or touch latency",
+  "completed_at_epoch_ms": 1790748894363
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "decision": "Blocked",
+  "reason": "User-provided screenshots show official CarWith CarLife entry and component-download prompt. New phone metadata, actual installed component identity/source, compatible authorized receiver and repeated real CarWith video are not yet verified.",
+  "next_step": "User now prioritizes native CarWith / ICCOA Carlink discovery, authentication and first frame; CarLife is fallback only. Obtain a legally testable head-unit SDK plus initialization/discovery sample, or sufficient permitted protocol specifications. See NATIVE_CARWITH_FIRST_FRAME.md. This CarLife record stays Blocked and cannot certify the native path.",
+  "phone": {
+    "model": "",
+    "region_rom": "",
+    "hyperos": "HyperOS 3 reported by user; exact build not captured",
+    "android": "",
+    "carwith_version": "",
+    "plugin_version": "",
+    "installation_source": ""
+  },
+  "head_unit": {
+    "model": "",
+    "firmware": "",
+    "android": "",
+    "display": "",
+    "network_role": ""
+  },
+  "carwith_entry": "User screenshot: CarLife连接; 下载CarLife组件; 如要通过CarLife协议使用CarWith功能，请保证手机内存在CarLife组件. Parent task inspected originals; executor records relevant text only.",
+  "reference_receiver": "",
+  "reference_version": "",
+  "reference_source": "",
+  "authorization_review": "",
+  "license_review": "",
+  "authentication_conditions": "",
+  "independent_carlife_comparison": "",
+  "test_environment": "",
+  "runs": []
+}

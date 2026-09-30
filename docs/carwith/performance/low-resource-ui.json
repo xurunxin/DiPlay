@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "profile": "low_resource",
+  "captured_at": "2026-09-30T02:33:19.622063+00:00",
+  "scope": "debug UI only; no CarWith session or video fixture",
+  "package": "com.shihab.diplay.hudtest",
+  "android": "14",
+  "abi": "x86_64",
+  "guest_cpu_count": 2,
+  "guest_mem_total_kib": 2534552,
+  "display": "Physical size: 1080x2340\nOverride size: 1280x720",
+  "density": "Physical density: 440\nOverride density: 240",
+  "cold_process_launch_ms": [
+    663,
+    629,
+    537,
+    601,
+    588
+  ],
+  "launch_median_ms": 601,
+  "launch_p95_ms": 663,
+  "cold_launch_caveat": "process force-stopped; OS/storage caches not cleared",
+  "duration_seconds": 60.49,
+  "ui_transitions": 100,
+  "observed_pid_changes": 0,
+  "gfx": {
+    "rendered_ui_frames": 2072,
+    "janky_ui_frames": 155,
+    "ui_frame_p50_ms": 16,
+    "ui_frame_p90_ms": 26,
+    "ui_frame_p95_ms": 32,
+    "ui_frame_p99_ms": 150,
+    "janky_ui_percent": 7.48,
+    "projection_fps": null,
+    "projection_latency_ms": null
+  },
+  "resources": [
+    {
+      "pss_kib": 79138,
+      "rss_kib": 166496,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 119647ms to 114296ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 0.0
+    },
+    {
+      "pss_kib": 88748,
+      "rss_kib": 177432,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 129991ms to 124640ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 10.27
+    },
+    {
+      "pss_kib": 90696,
+      "rss_kib": 179636,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 139697ms to 134346ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 20.02
+    },
+    {
+      "pss_kib": 88620,
+      "rss_kib": 177584,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 149924ms to 144573ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 30.28
+    },
+    {
+      "pss_kib": 92304,
+      "rss_kib": 181268,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 160160ms to 154809ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 40.49
+    },
+    {
+      "pss_kib": 92760,
+      "rss_kib": 181728,
+      "cpu_percent_reported": null,
+      "cpu_window": "CPU usage from 169883ms to 164532ms ago (2026-09-30 02:30:18.625 to 2026-09-30 02:30:23.976):",
+      "elapsed_seconds": 50.17
+    }
+  ],
+  "cpu_caveat": "dumpsys cpuinfo historical window per sample, not fixed-window instantaneous CPU",
+  "snapdragon_625_equivalent": false
+}

@@ -5,3 +5,9 @@ Use the [installation guide](INSTALL.md). With the car parked, verify wired and 
 For channel memory, connect until authenticated CarPlay renders, disconnect and reconnect without changing the car's Wi-Fi association. Look for `remembered saved` followed by `remembered first`. Report absent events; creating a hotspot alone is insufficient.
 
 Include head-unit model, DiLink/Android, iPhone/iOS, wired/wireless, app version and exact steps. Do not post credentials or unreviewed personal information. See [compatibility](COMPATIBILITY.md) for remaining limitations.
+
+CarWith roadmap work starts with the [M0 access review and bench baseline](carwith/M0_REVIEW.md). Its current G0 decision is Blocked; CarWith support is not implemented or hardware-verified.
+
+Reproducible emulator UI/CPU measurements and current CarWith, CarbitLink, and ICCOA blockers are recorded in [emulator findings](carwith/EMULATOR_FINDINGS.md). These measurements do not validate projection or Snapdragon 625 equivalence.
+
+The latest user instruction prioritizes native CarWith / ICCOA Carlink discovery, authentication and first frame; CarLife is fallback only. See [current native plan and blockers](carwith/NATIVE_CARWITH_FIRST_FRAME.md). The independent [debug receiver decoder bench](carwith/RECEIVER_BENCH.md) tests synthetic local media only and cannot unlock G0.

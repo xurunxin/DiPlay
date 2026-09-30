@@ -419,4 +419,9 @@
     <string name="turn_card_horizontal">Turn card · horizontal</string>
     <string name="turn_card_vertical">Turn card · vertical</string>
     <string name="reset_turn_card_to_centre">Reset turn card to centre</string>
+    <string name="carwith_video_settings">CarWith video</string>
+    <string name="carwith_video_maximum">Maximum video resolution</string>
+    <string name="carwith_video_720p">720p (default)</string>
+    <string name="carwith_video_1080p">1080p</string>
+    <string name="carwith_video_pending">CarWith connection is not available yet. This limit is saved for receiver capability selection.</string>
 </resources>

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "decision": "Blocked",
+  "reason": "This record is only the old Redmi K30 Pro / Android 12 / CarWith 3.2 combination, where the user saw no CarLife entry. A separate HyperOS 3 phone now shows official CarLife-component UI; its installation, receiver identity and real sessions remain unverified.",
+  "next_step": "User now prioritizes native CarWith / ICCOA Carlink discovery, authentication and first frame; CarLife is fallback only. Obtain a legally testable head-unit SDK plus initialization/discovery sample, or sufficient permitted protocol specifications. See NATIVE_CARWITH_FIRST_FRAME.md. This CarLife record stays Blocked and cannot certify the native path.",
+  "phone": {
+    "model": "Redmi K30 Pro",
+    "region_rom": "MIUI V14.0.4.0.SJKCNXM; region not independently confirmed",
+    "hyperos": "Not identified; observed MIUI V140",
+    "android": "12 (API 31)",
+    "carwith_version": "com.miui.carlink 3.2.0-20241009 (103002000)",
+    "plugin_version": "",
+    "installation_source": "installerPackageName=com.xiaomi.market"
+  },
+  "head_unit": {
+    "model": "Android Emulator 37.1.11 / isolated DiPlay_G0_API34 (not real vehicle hardware)",
+    "firmware": "Google Play x86_64 Android 34 image revision 14",
+    "android": "14 (API 34)",
+    "display": "1280x720 override; 240 dpi; 60 Hz configured",
+    "network_role": "Default emulator network; no phone bridge, forwarding or network settings changed"
+  },
+  "carwith_entry": "",
+  "reference_receiver": "",
+  "reference_version": "",
+  "reference_source": "",
+  "authorization_review": "",
+  "license_review": "",
+  "authentication_conditions": "",
+  "independent_carlife_comparison": "",
+  "test_environment": "",
+  "runs": []
+}
