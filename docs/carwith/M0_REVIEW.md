@@ -71,3 +71,18 @@ python scripts/check_public_tree.py
 退出码：0 = Go 记录字段完整，可送人工审查；1 = 格式/必需字段错误；2 = 有效 Blocked/No-Go，G0 不开放。检查器不访问网络/设备、不验证链接、证据真实性、法律许可或视频，不自动更新 Project、不关闭 Issues、不宣布 G0 通过。合成测试记录只测试规则，不是实机证据。
 
 本次默认记录明确 Blocked，设备字段留空。资料补齐后最小下一步是步骤 1–4 的授权台架实验，而不是继续猜测协议或重构生产路径。
+
+## 只读设备版本采集
+
+`collect_carwith_baseline.py` 是 #3 的可独立实施工具。参考 Android 官方 [ADB](https://developer.android.com/tools/adb) 与 [dumpsys](https://developer.android.com/tools/dumpsys) 指南：显式选择设备，使用 getprop 白名单和指定包的 package dump，输出仅保留版本字段。没有调用安装、授权、Root、连接网络、抓包或账号/认证读取命令。ADB 只用于台架准备，不作为日常投屏前提。
+
+```powershell
+python scripts/collect_carwith_baseline.py --serial DEVICE_SELECTOR --role phone --package ACTUAL.CARWITH.PACKAGE --package ACTUAL.PLUGIN.PACKAGE --output C:\local\phone-baseline.json
+python scripts/collect_carwith_baseline.py --serial DEVICE_SELECTOR --role head_unit --package com.shihab.diplay --output C:\local\headunit-baseline.json
+```
+
+必须替换占位符，包名从目标设备已知配置确认；不猜 CarWith 包名。设备选择器仅用于调用，不保存进 JSON。原始 dumpsys 与 stderr 不保存/回显；不读取序列号、IP/MAC/SSID、账号、路线或认证资产。输出仍需人工审查，型号/版本和所选包名可能暴露设备组合。输出文件用排他创建，不覆盖已有文件；请保存到 Git 外。
+
+退出 0 只表示元数据采集完成；退出 2 表示设备未授权/不存在、超时、缺应用版本或输出文件不可用。空属性保存为 null，不伪造值。HyperOS/地区 ROM、安装来源、显示/网络角色、CarWith 入口、授权和实际投屏仍需人工填写到 M0 记录；采集文件不是 Go 证明。
+
+本机无设备路径已实跑：返回 2 且没有产生输出文件。12 个合成测试覆盖记录门禁与采集器的指定设备、未授权/离线拒绝、版本缺失、输入校验、错误脱敏和超时；真实成功采集路径仍待目标设备验收。
